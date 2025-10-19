@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://${DB_HOST:kassa-app-db}:${DB_PORT:5432}/${DB_NAME:omoda-db}
-    username: ${DB_USER:rob}
-    password: ${DB_PASSWORD:wendy}
+    url: jdbc:postgresql://kassa-app-db:5432/omoda-db
+    username: rob
+    password: wendy
   jpa:
     hibernate:
       ddl-auto: update
