@@ -1,0 +1,41 @@
+services:
+  db:
+    image: postgres
+    container_name: kassa-app-db
+    restart: always
+    environment:
+      POSTGRES_USER: rob
+      POSTGRES_PASSWORD: wendy
+      POSTGRES_DB: omoda-db
+    ports: [ "5432:5432" ]
+    volumes: [ "pgdata:/var/lib/postgresql/data" ]
+
+  backend:
+    build: ./backend
+    container_name: kassa-app-backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://kassa-app-db:5432/omoda-db
+      SPRING_DATASOURCE_USERNAME: rob
+      SPRING_DATASOURCE_PASSWORD: wendy
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: dockerfile
+    container_name: kassa-app-frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:

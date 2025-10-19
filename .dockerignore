@@ -1,0 +1,23 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Build artifacts
+**/target/
+**/node_modules/
+**/dist/
+**/build/
+
+.cursor/
+**/*.md
+
+# Docker
+**/dockerfile
+**/Dockerfile
+docker-compose*.yml
+
+
+# Environment
+**/.env*
+
